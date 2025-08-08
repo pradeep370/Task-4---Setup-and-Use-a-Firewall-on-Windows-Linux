@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 4 - Firewall Setup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        pre, code {
+            background-color: #f4f4f4;
+            padding: 8px;
+            border-radius: 4px;
+            display: block;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e8e8e8;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task 4 – Setup and Use a Firewall on Windows & Linux</h1>
+    <body>
+<pre><code>                                    Setup and Use a Firewall on Windows</code></pre>
+<p>Date - 08 august 2025 Submitted By - PRADEEP S</p>
+<p>🎯 Objective</p>
+<pre><code>     To configure and test basic inbound firewall rules on Windows by blocking Telnet (port 23) and allowing SSH (port 22), demonstrating understanding of network traffic filtering.</code></pre>
+<p>🔍 Summary: How a Firewall Filters Traffic</p>
+<pre><code>          A firewall acts as a barrier between a trusted internal network and untrusted external networks (like the internet). It filters network traffic based on a set of predefined rules.</code></pre>
+<p>Here’s how it works:</p>
+<pre><code>       🔐 Inbound Rules: Control what kind of traffic is allowed into your system 
+
+       📤 Outbound Rules: Control what traffic is allowed to leave your system 
+
+        The firewall evaluates each incoming or outgoing packet and either:
+
+                          * Allows it — if it matches a permitted rule.
+
+                          * Blocks it — if it matches a deny rule or doesn't match any allowed rules.</code></pre>
+<p>🛠️ Tools Used</p>
+<pre><code>     * Windows Defender Firewall
+     * telnet Client (Windows feature)
+     * Command Prompt (cmd)
+     * Open ssh Server (Windows Features)</code></pre>
+<p>🔄 Steps Summary(Windows)</p>
+<pre><code> 1.Opened windows defender firewall with advanced security.
+     
+     * Accessed via Control Panel &gt;Windows Defender Firewall&gt;Advanced Settings.
+   
+ 2.Created Inbound Rule to block Port 23 (Telnet)
+     
+     * Rule Type - port
+     * Protocol - TCP
+     * port - 23
+     * Action - Block The Connection
+     * Profile - Domain, private, public
+     * Name - Block_telnet_23
+
+  3.Created Inbound Rule to Allow Port 22 (SSH)
+   
+     * Rule Type - port</code></pre>
+<p>  * Protocol - TCP * port - 22 * Action - Allow The Connection   *
+Profile - Domain, private, public   * Name - Allow_ssh_22</p>
+<pre><code>  4.Verified firewall Rules
+      
+     * Confirmed both rules are listed and enabled under Inbound Rules</code></pre>
+<p>  5.tested with Telnet</p>
+<pre><code>      * Ran Telnet localhost 23 &gt; Connection failed (port blocked as expected)
+      * Ran Telnet localhost 22 &gt; connection failed 
+               
+               Expected, since SSH service is not running, but port is allowed in firewall. because  Windows does not run SSH server by default, unless you manually install and start it.
+             
+               So, the firewall allowed port 22, but no application is listening ,so the connection fails. this is not a firewall problem, its a missing service. 
+       
+    5.Commands  are used in Windows
+       * For enable Telnet in optional feature press win+R and enter optional features. after opened scroll down and enable Telnet.
+       * telnet localhost 23 (Telnet)
+       * telnet localhost 22 (SSH)</code></pre>
+<p>🐧Firewall Configuration &amp; Testing on Kali Linux</p>
+<p>🛠️ Tools Used</p>
+<pre><code>       * UFW (Uncomplicated Firewall) – To configure firewall rules
+
+       * Telnet Client – To test port accessibility
+
+       * Command Line (Terminal) – For executing firewall and network commands
+
+       * Netstat – To check open/listening ports</code></pre>
+<p>⚙️ Setup Summary</p>
+<pre><code>    1.Enable ufw firewall - sudo ufw enable
+    2.Allowed SSH (port 22) - sudo ufw allow 22/tcp
+    3.Blocked Telnet (port 23) - sudo ufw deny 23/tcp
+    4.Verified firewall rules - sudo ufw status numbered / sudo ufw status verbose           
+       </code></pre>
+<p>🧪 Firewall Testing (Telnet Results)</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 20%"/>
+<col style="width: 27%"/>
+<col style="width: 43%"/>
+<col style="width: 7%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Test Command</th>
+<th>Expected Result</th>
+<th>Actual Output</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>telnet localhost 22</td>
+<td>Connect if SSH is running</td>
+<td>Connection refused (service not running)</td>
+<td>✅ Correct</td>
+</tr>
+<tr class="even">
+<td>telnet localhost 23</td>
+<td>Connection refused (blocked)</td>
+<td>Connection refused</td>
+<td>✅ Correct</td>
+</tr>
+</tbody>
+</table>
+</body>
+</body>
+</html>
